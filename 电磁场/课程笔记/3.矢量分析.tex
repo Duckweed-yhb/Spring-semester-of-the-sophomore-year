@@ -1,0 +1,188 @@
+% 矢量分析核心知识点 - LaTeX 子文件
+% 适用：主文档需加载 amsmath, amssymb, enumitem, esint 包
+% 导入方式：\input{vector_analysis.tex}
+
+% 列表格式统一（全局生效，避免重复定义）
+\setlist[itemize]{
+    label=$\bullet$, 
+    leftmargin=2em,
+    itemsep=0.5em,    % 列表项间距
+    parsep=0.2em      % 列表项内段落间距
+}
+\setlist[itemize,2]{
+    label=$\circ$, 
+    leftmargin=3em,
+    itemsep=0.3em,
+    parsep=0.1em
+}
+
+\section{矢量分析}
+
+\subsection{正交坐标系}
+\subsubsection{正交坐标系定义}
+正交坐标系是指坐标系中各坐标基矢量相互垂直（点积为0）、且为单位矢量的坐标系，满足正交性和归一性，是矢量分析的基础框架。
+
+\subsubsection{三种常用正交坐标系}
+\begin{itemize}
+    \item \textbf{直角坐标系（笛卡尔坐标系）}：坐标 $(x, y, z)$，单位矢量 $\vec{e}_x, \vec{e}_y, \vec{e}_z$（常矢量），适用于规则几何形状、线性问题；
+    \item \textbf{柱坐标系}：坐标 $(\rho, \phi, z)$，单位矢量 $\vec{e}_\rho, \vec{e}_\phi, \vec{e}_z$（$\vec{e}_\rho, \vec{e}_\phi$ 为变矢量），适用于圆柱对称问题；
+    \item \textbf{球坐标系}：坐标 $(r, \theta, \phi)$，单位矢量 $\vec{e}_r, \vec{e}_\theta, \vec{e}_\phi$（均为变矢量），适用于球对称问题。
+\end{itemize}
+
+\subsubsection{坐标变换}
+\begin{itemize}
+  \item 直角坐标 $\leftrightarrow$ 柱坐标：
+  \[
+  \rho = \sqrt{x^2+y^2},\quad \phi = \arctan\frac{y}{x},\quad z=z
+  \]
+  \item 直角坐标 $\leftrightarrow$ 球坐标：
+  \[
+  r = \sqrt{x^2+y^2+z^2},\quad \theta = \arccos\frac{z}{r},\quad \phi = \arctan\frac{y}{x}
+  \]
+\end{itemize}
+
+\subsection{矢量代数}
+\subsubsection{矢量基本表示}
+矢量为既有大小又有方向的量，记为 $\vec{A}$ 或 $\boldsymbol{A}$。直角坐标系中：
+\[
+\vec{A} = A_x \vec{e}_x + A_y \vec{e}_y + A_z \vec{e}_z
+\]
+模长：
+\[
+|\vec{A}| = \sqrt{A_x^2 + A_y^2 + A_z^2}
+\]
+
+\subsubsection{矢量点乘（数量积）}
+\begin{itemize}
+    \item \textbf{定义}：$\vec{A} \cdot \vec{B} = |\vec{A}||\vec{B}|\cos\theta$，$\theta$ 为两矢量夹角；
+    \item \textbf{直角坐标}：$\vec{A} \cdot \vec{B} = A_xB_x + A_yB_y + A_zB_z$；
+    \item \textbf{性质}：交换律、分配律，结果为标量；
+    \item \textbf{几何意义}：表征同向程度，正交时点积为 $0$。
+\end{itemize}
+
+\subsubsection{矢量叉乘（矢量积）}
+\begin{itemize}
+    \item \textbf{定义}：$\vec{A} \times \vec{B} = |\vec{A}||\vec{B}|\sin\theta \, \vec{e}_n$，结果为矢量；
+    \item \textbf{直角坐标（行列式）}：
+    \[
+    \vec{A} \times \vec{B} = \begin{vmatrix}
+    \vec{e}_x & \vec{e}_y & \vec{e}_z \\
+    A_x & A_y & A_z \\
+    B_x & B_y & B_z
+    \end{vmatrix}
+    \]
+    \item \textbf{性质}：反交换律 $\vec{A} \times \vec{B} = -\vec{B} \times \vec{A}$，不满足结合律；
+    \item \textbf{几何意义}：模长为两矢量张成的平行四边形面积。
+\end{itemize}
+
+\subsection{标量场和矢量场}
+\begin{itemize}
+    \item \textbf{标量场}：空间每点对应一个标量值，如电势 $\varphi(\vec{r})$、温度 $T(\vec{r})$；
+    \item \textbf{等势面}：$\varphi(x,y,z) = C$，等势面互不相交，梯度与等势面垂直；
+    \item \textbf{矢量场}：空间每点对应一个矢量，如电场 $\vec{E}(\vec{r})$、磁场 $\vec{H}(\vec{r})$；
+    \item \textbf{矢量线方程}：$\displaystyle \frac{dx}{A_x} = \frac{dy}{A_y} = \frac{dz}{A_z}$。
+\end{itemize}
+
+\subsection{标量场的梯度}
+\subsubsection{哈密顿算子 $\nabla$}
+矢量微分算子，直角坐标系：
+\[
+\nabla = \frac{\partial}{\partial x}\vec{e}_x + \frac{\partial}{\partial y}\vec{e}_y + \frac{\partial}{\partial z}\vec{e}_z
+\]
+
+\subsubsection{梯度}
+\begin{itemize}
+    \item \textbf{定义}：
+    \[
+    \nabla \varphi = \frac{\partial \varphi}{\partial x}\vec{e}_x + \frac{\partial \varphi}{\partial y}\vec{e}_y + \frac{\partial \varphi}{\partial z}\vec{e}_z
+    \]
+    \item \textbf{物理意义}：标量场变化率最大的方向，大小为最大变化率；
+    \item \textbf{几何意义}：梯度方向垂直于等势面。
+\end{itemize}
+
+\subsubsection{方向导数}
+\begin{itemize}
+    \item \textbf{公式}：$\displaystyle \frac{\partial \varphi}{\partial l} = \nabla \varphi \cdot \vec{l}_0$；
+    \item 最大值为 $|\nabla\varphi|$，最小值为 $-|\nabla\varphi|$；
+    \item 沿等势面方向，方向导数为 $0$。
+\end{itemize}
+
+\subsection{矢量场的通量和散度}
+\subsubsection{通量}
+\begin{itemize}
+    \item \textbf{定义}：矢量场穿过曲面的“流量”
+    \[
+    \varPhi = \iint_{S} \vec{A} \cdot d\vec{S}
+    \]
+    \item 闭合曲面：$\displaystyle \varPhi = \oiint_{S} \vec{A} \cdot d\vec{S}$，外法向为正。
+\end{itemize}
+
+\subsubsection{散度}
+\begin{itemize}
+    \item \textbf{定义}：
+    \[
+    \nabla \cdot \vec{A} = \lim_{\Delta V \to 0} \frac{1}{\Delta V}\oiint_{S} \vec{A} \cdot d\vec{S}
+    \]
+    \item \textbf{直角坐标}：$\displaystyle \nabla \cdot \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}$；
+    \item \textbf{柱坐标}：
+    \[
+    \nabla \cdot \vec{A} = \frac{1}{\rho} \frac{\partial (\rho A_\rho)}{\partial \rho} + \frac{1}{\rho} \frac{\partial A_\phi}{\partial \phi} + \frac{\partial A_z}{\partial z}
+    \]
+    \item \textbf{球坐标}：
+    \[
+    \nabla \cdot \vec{A} = \frac{1}{r^2} \frac{\partial (r^2 A_r)}{\partial r} 
+    + \frac{1}{r \sin\theta} \frac{\partial (A_\theta \sin\theta)}{\partial \theta} 
+    + \frac{1}{r \sin\theta} \frac{\partial A_\phi}{\partial \phi}
+    \]
+    \item \textbf{物理意义}：描述场的源/汇强度，$\nabla\cdot\vec{A}>0$ 为源，$<0$ 为汇。
+\end{itemize}
+
+\subsubsection{散度定理（高斯定理）}
+\[
+\oiint_{\partial V} \vec{A} \cdot d\vec{S} = \iiint_V \nabla \cdot \vec{A} \, dV
+\]
+将闭合面积分转化为体积分，建立全局通量与局部散度的联系。
+
+\subsection{矢量场的环量和旋度}
+\subsubsection{环量}
+矢量场沿闭合曲线的线积分，反映旋转特性：
+\[
+\Gamma = \oint_L \vec{A} \cdot d\vec{l}
+\]
+
+\subsubsection{旋度}
+\begin{itemize}
+    \item \textbf{直角坐标}：
+    \[
+    \nabla \times \vec{A} = \begin{vmatrix}
+    \vec{e}_x & \vec{e}_y & \vec{e}_z \\
+    \partial_x & \partial_y & \partial_z \\
+    A_x & A_y & A_z
+    \end{vmatrix}
+    \]
+    \item \textbf{柱坐标、球坐标}形式在电磁与力学问题中常用，形式略；
+    \item \textbf{物理意义}：描述场的局部旋转强度，旋度为0为无旋场。
+\end{itemize}
+
+\subsubsection{斯托克斯定理}
+\[
+\oint_L \vec{A} \cdot d\vec{l} = \iint_S (\nabla \times \vec{A}) \cdot d\vec{S}
+\]
+将闭合线积分转化为曲面积分，建立环量与旋度的联系。
+
+\subsection{矢量恒等式与亥姆霍兹定理}
+\subsubsection{重要恒等式}
+\begin{itemize}
+    \item 梯度的旋度恒为零：$\nabla \times (\nabla \varphi) = 0$；
+    \item 旋度的散度恒为零：$\nabla \cdot (\nabla \times \vec{A}) = 0$。
+\end{itemize}
+
+\subsubsection{亥姆霍兹定理}
+\begin{itemize}
+    \item 若矢量场的散度、旋度及边界条件给定，且场在无穷远处趋于0，则矢量场唯一确定；
+    \item 任意矢量场可分解为：无旋场（梯度场）+ 无散场（旋度场）；
+    \item 是电磁场、流体力学中场的唯一性与分解的理论基础。
+\end{itemize}
+
+% 恢复默认列表格式
+\setlist[itemize]{reset}

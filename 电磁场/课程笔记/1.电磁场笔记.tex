@@ -1,0 +1,51 @@
+% 电磁场课程笔记 - 主文档
+% 版本：1.0 完整版
+% 作者：浮萍
+% GitHub：https://github.com/Duckweed-yhb
+% 邮箱：3071974740@qq.com
+
+\documentclass{article}
+% 基础宏包（中文+数学+格式）
+\usepackage{ctex}                 % 中文支持
+\usepackage{amsmath,amssymb}      % 数学公式核心
+\usepackage{esint}                % 新增：解决 \oiint/\iiint 未定义问题
+\usepackage{booktabs}             % 表格美化
+\usepackage{array}                % 表格扩展
+\usepackage{xcolor}               % 颜色支持
+\usepackage{enumitem}             % 列表格式
+\usepackage{geometry}             % 页面布局
+\usepackage{hyperref}             % 新增：目录超链接（可选，提升体验）
+% 页面设置：A4纸，2.5cm边距
+\geometry{a4paper,margin=2.5cm}
+% 取消段落缩进，优化阅读体验
+\setlength{\parindent}{0pt}
+% 行距调整
+\linespread{1.2}
+
+% 新增：目录格式优化（可选）
+\renewcommand{\contentsname}{{\Huge \bfseries 目录}}  % 目录标题放大加粗
+
+
+% 新增：超链接样式（可选，无颜色边框）
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    anchorcolor=black,
+    citecolor=black,
+    urlcolor=blue
+}
+
+\begin{document}
+% 封面
+\input{2.cover.tex}
+
+% 生成目录（添加目录标题+调整格式）
+\newpage  % 封面后换页，目录单独一页
+\tableofcontents  % 自动生成目录
+\newpage  % 目录后换页，开始正文
+
+% 引入各章节内容
+\input{3.矢量分析.tex}
+\input{4.静电场.tex}
+
+\end{document}
